@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-
-
+import requests
+import utils
 def listToString(string):
     str1 = " "
     return str1.join(string)
@@ -13,6 +13,7 @@ class FilterHtml:
         self.soup = BeautifulSoup(open(self.source,encoding="utf8",errors="ignore"), 'html.parser')
         self.listaClase = []
         self.listaImagini = []
+        self.listaPDF=[]
         self.content = ''
         self.div = ''
 
@@ -52,11 +53,17 @@ class FilterHtml:
 
         self.div = bestDiv
 
-    def extractUsefullResources(self, imgtype):
+    def extractImages(self):
         divToSearch = self.soup.find("div", {"class": self.div})
-        images = divToSearch.find_all(imgtype)
+        images = divToSearch.find_all("img",src=True)
         for image in images:
             self.listaImagini.append(image['src'])
+    def extractPdfs(self):
+        divToSearch = self.soup.find("div", {"class": self.div})
+        pdfs=divToSearch.find_all("a",href=True)
+        for pdf in pdfs:
+           if utils.get_extension(pdf["href"])=='.pdf':
+               self.listaPDF.append(pdf["href"])
 
     def set_content(self):
         thiscontent = self.soup.find("div", {"class": self.div})
@@ -66,7 +73,8 @@ class FilterHtml:
         self.setClassList()
         if  self.listaClase:
             self.setBestDiv()
-            self.extractUsefullResources("img")
+            self.extractPdfs()
+            self.extractImages()
             self.set_content()
 
         # TODO: Trebuie sa procesam si fisierele de tip pdf. Acestea se gasesc folosind a href="blabla.pdf"
@@ -74,5 +82,6 @@ class FilterHtml:
         # print(div)
 
 # extractor("C:/Users/Iulian/Desktop/Proiect
-# Licenta/Blog_Scrapper/downloads/krebsonsecurity/7a3c42a708726ac7534008355eae270f") extractor(
-# "C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/thehackernews/65bc8f398951089f8aa2938c4634a534")
+# Licenta/Blog_Scrapper/downloads/krebsonsecurity/7a3c42a708726ac7534008355eae270f")
+a=FilterHtml("C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/thehackernews/abf9bc598b143e7226083fe7d2952cae")
+a.extract()

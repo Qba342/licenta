@@ -8,7 +8,7 @@ import utils
 # vom lua prima data un numar de pagini
 # vom obtine paginile respective si le vom adauga intr-o lista
 
-class BlogScrapper:
+class Usual_blog_scrapper:
     def __init__(self,base_url,older_posts):
         self.base_url=base_url
         self.older_search=older_posts

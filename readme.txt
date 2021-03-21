@@ -12,3 +12,18 @@ https://www.schneier.com/
 https://www.grahamcluley.com/
 https://www.troyhunt.com/
 http://securityaffairs.co/wordpress/
+
+https://us-cert.cisa.gov/ncas/analysis-reports?page=2
+
+
+
+IOC contin:
+-adrese IP
+-domenii
+-nume fisiere
+-procese
+-servicii
+-intrari de tip windows registry
+-hash-uri
+
+https://towardsdatascience.com/something-from-nothing-use-nlp-and-ml-to-extract-and-structure-web-data-3f49b2f72b13

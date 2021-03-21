@@ -1,5 +1,6 @@
 from Relevant_content_picker.imageExtractor import ImageExtractor
 from Relevant_content_picker.FilterHtml import FilterHtml
+from Relevant_content_picker.pdfExtractor import pdfExtractor
 import utils
 
 
@@ -19,7 +20,9 @@ class UnitarRCP:
         self.source = source
 
     def run(self):
+        print(utils.Statics.idProc)
         imgtext = ''
+        pdftext=''
         filter = FilterHtml(self.source)
         filter.extract()
         imgHandler = ImageExtractor()
@@ -27,8 +30,14 @@ class UnitarRCP:
             imgHandler.set_link(img)
             imgHandler.extract()
             imgtext = imgtext + imgHandler.text + "\n"
+        for pdf in filter.listaPDF:
+            pdfHandler=pdfExtractor(pdf)
+            pdfHandler.extract()
+            pdftext=pdftext+pdfHandler.text+"\n"
+            print(self.source)
 
-        finaltext = filter.content + "\n" + imgtext
+
+        finaltext = filter.content + "\n" + imgtext+"\n"+pdftext
         finaltext = finaltext.replace("\xc2\xa0", " ")  # pentru a curata de caracterul nbsp
         utils.writetofile(finaltext, self.path, 'w')
         utils.Statics.idProc = utils.Statics.idProc + 1

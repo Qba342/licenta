@@ -5,6 +5,14 @@ import pathlib
 class Statics:
     idProc=1
 
+
+def get_extension(string):
+    split_tup = os.path.splitext(string)
+    return split_tup[1]
+
+def remove_file(path):
+    os.remove(path)
+
 def get_rid_of_spaces(string):
     return(" ".join(string.split()))
 
