@@ -77,8 +77,6 @@ class FilterHtml:
             self.extractImages()
             self.set_content()
 
-        # TODO: Trebuie sa procesam si fisierele de tip pdf. Acestea se gasesc folosind a href="blabla.pdf"
-        # TODO: O sa incepem sa facem parsarea imaginilor
         # print(div)
 
 # extractor("C:/Users/Iulian/Desktop/Proiect

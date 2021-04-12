@@ -8,6 +8,10 @@ from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfparser import PDFParser
 import requests
 import utils
+import tabula
+
+
+
 
 
 class pdfExtractor:
@@ -44,10 +48,24 @@ class pdfExtractor:
 
         self.text=output_string.getvalue()
 
+    def get_tables(self):
+
+
+        file = self.path
+
+        tables = tabula.read_pdf(file, pages="all", multiple_tables=True,stream=True)
+        #tabula.convert_into(file,"aaa.csv",all)
+
+
+        print(tables)
+
+
+
 
     def extract(self):
         self.get_pdf()
-        self.get_pdf_writing()
+        #self.get_pdf_writing()
+        #self.get_tables()
 
 
 
@@ -55,6 +73,6 @@ class pdfExtractor:
 
 
 
-#p=pdfExtractor('https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-china-chopper.pdf')
-#p.get_pdf()
-#p.get_pdf_writing()
+p=pdfExtractor('https://sedl.org/afterschool/toolkits/science/pdf/ast_sci_data_tables_sample.pdf')
+
+p.extract()

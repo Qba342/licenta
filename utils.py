@@ -1,9 +1,15 @@
 import os
 import requests
 import pathlib
+import re
+def getpath():
+    return (pathlib.Path(__file__).parent)
 
 class Statics:
     idProc=1
+
+def replace(substrToBeRepalced,substrToReplace,string :str):
+    return re.sub(substrToBeRepalced,substrToReplace,string)
 
 
 def get_extension(string):
@@ -12,6 +18,9 @@ def get_extension(string):
 
 def remove_file(path):
     os.remove(path)
+
+def remove_empty_dir(path):
+    os.rmdir(path)
 
 def get_rid_of_spaces(string):
     return(" ".join(string.split()))
@@ -47,13 +56,15 @@ def RemoveComFromString(string):
 
 def writetofile(data,path,mode):
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, mode,encoding="utf-8") as f:
-        f.write(data)
+    if(mode=="wb"):
+        with open(path, mode) as f:
+            f.write(data)
+    else:
+        with open(path, mode,encoding="utf-8") as f:
+            f.write(data)
 
 def download(url, downloadSource):
     r = requests.get(url, allow_redirects=True)
     writetofile(r.content,downloadSource,"wb")
 
 
-def getpath():
-    return pathlib.Path().absolute()

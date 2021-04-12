@@ -14,6 +14,7 @@ class RCP:
                 ur = UnitarRCP(self.downloads_path+site+"/"+blog)
                 ur.run()
 
-rcp=RCP("C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/")
+#rcp=RCP("C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/")
+rcp=RCP(str(utils.getpath())+"/downloads/")
 rcp.process()
 

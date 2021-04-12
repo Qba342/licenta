@@ -30,20 +30,26 @@ class UnitarRCP:
             imgHandler.set_link(img)
             imgHandler.extract()
             imgtext = imgtext + imgHandler.text + "\n"
+
         for pdf in filter.listaPDF:
             pdfHandler=pdfExtractor(pdf)
             pdfHandler.extract()
             pdftext=pdftext+pdfHandler.text+"\n"
-            print(self.source)
 
 
-        finaltext = filter.content + "\n" + imgtext+"\n"+pdftext
-        finaltext = finaltext.replace("\xc2\xa0", " ")  # pentru a curata de caracterul nbsp
-        utils.writetofile(finaltext, self.path, 'w')
+
+        filteredText=filter.content.replace("&nbsp", " ")
+        utils.writetofile(filteredText, self.path+"/html", 'w')
+
+        utils.writetofile(imgtext, self.path+"/img", 'w')
+        utils.writetofile(pdftext, self.path+"/pdf", 'w')
+
+
+
         utils.Statics.idProc = utils.Statics.idProc + 1
     # print(imgHandler.text)
 
 
-RCP = UnitarRCP(
-    "C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/thehackernews/65bc8f398951089f8aa2938c4634a534")
-RCP.run()
+#RCP = UnitarRCP(
+#    "C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/thehackernews/65bc8f398951089f8aa2938c4634a534")
+#RCP.run()
