@@ -62,10 +62,12 @@ class Usual_blog_scrapper(IBlog_Scrapper):
                 DownloadAdress2 =str(utils.getpath())+"/"+ DownloadAdress + md5  # pentru a tine evidenta
                 utils.download(blog, DownloadAdress2)
 
-    # GetImages(base_url,listaPagini[10])# vom prelucrea imaginile astfel incat sa preluam scrisul din ele
+
+    def MEMrun(self):
+        self.__GetBlogsFromPage()
+        print(self.listaBloguri)
 
 
-#DownloadResources("https://thehackernews.com/", False)  # vom pune True daca vrem sa cautam si in postari mai vechi
 
 scrap=Usual_blog_scrapper("https://thehackernews.com/", False)
-scrap.DownloadResources()
+scrap.MEMrun()

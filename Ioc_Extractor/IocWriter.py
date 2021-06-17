@@ -22,12 +22,16 @@ def create_ioc_object(ioc_name, items, and_or=True):
     return ioc
 
 
+def write_to_file(ioc:ioc_api.IOC):
+    ioc_api.IOC.write_ioc_to_file(ioc)
+
+
 def construct_ioc(ioc:str):
     ioctype=If.getIocType(ioc)
     if ioctype=="url":
         tup=("contains","Network","Network/URI","string",ioc)#asta o sa includa inclusiv dns
     elif ioctype=="ipv4":
-        tup=("is","DnsEntryItem","DnsEntryItem/RecordData/IPv4Address","IP",ioc)
+        tup=("is","DnsEntryItem","DnsEntryItem/RecordData/IPv4Address","domain|ip",ioc)
     elif ioctype=="ipv6":
         tup = ("is", "DnsEntryItem", "DnsEntryItem/RecordData/IPv6Address", "IP", ioc)
     elif ioctype=="email":
@@ -54,5 +58,5 @@ def construct_ioc(ioc:str):
 
 
 
-a=create_ioc_object("aaa",{construct_ioc("192.168.1.1")},False)
-print(a)
+a=create_ioc_object("ccc",{construct_ioc("19.2.43.144")},False)
+write_to_file(a)
