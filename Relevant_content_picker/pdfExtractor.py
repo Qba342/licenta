@@ -21,7 +21,7 @@ class pdfExtractor:
         self.path=str(utils.getpath())+"/tmp.pdf"#il vom stoca aici, apoi il vom sterge
         self.text=''
 
-    def __del__(self):
+    def delete(self):
         utils.remove_file(self.path)
 
 

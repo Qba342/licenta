@@ -7,10 +7,11 @@ class RCP:
 
     def process(self):
         lista_site=utils.list_filenames(self.downloads_path)
+        visited_list=0
 
         for site in lista_site:
             lista_bloguri=utils.list_filenames(self.downloads_path+site+"/")
-            for blog in lista_bloguri:
+            for blog in lista_bloguri: #md5-ul blogurilor
                 ur = UnitarRCP(self.downloads_path+site+"/"+blog)
                 ur.run()
 

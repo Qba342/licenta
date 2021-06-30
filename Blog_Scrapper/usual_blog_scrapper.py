@@ -5,6 +5,8 @@ import utils
 
 
 from Blog_Scrapper.IBlog_Scrapper import IBlog_Scrapper
+from MyApis import IOXApi
+
 
 # site-urile pe care vom face crawl sunt de forma site/page/i
 # vom lua prima data un numar de pagini
@@ -56,18 +58,19 @@ class Usual_blog_scrapper(IBlog_Scrapper):
                 utils.download(pagina, DownloadAdress2)
         else:
             self.__GetBlogsFromPage()
+            api=IOXApi("../conf")
+            visited=api.getVisited()
 
             for blog in self.listaBloguri:
-                md5 = hashlib.md5(blog.encode()).hexdigest()
-                DownloadAdress2 =str(utils.getpath())+"/"+ DownloadAdress + md5  # pentru a tine evidenta
-                utils.download(blog, DownloadAdress2)
+                if blog not in visited:
+                    md5 = hashlib.md5(blog.encode()).hexdigest()
+                    DownloadAdress2 =str(utils.getpath())+"/"+ DownloadAdress + md5  # pentru a tine evidenta
+                    utils.download(blog, DownloadAdress2)
+                    api.addVisited(blog)
 
 
-    def MEMrun(self):
-        self.__GetBlogsFromPage()
-        print(self.listaBloguri)
 
 
 
 scrap=Usual_blog_scrapper("https://thehackernews.com/", False)
-scrap.MEMrun()
+scrap.DownloadResources()

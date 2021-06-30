@@ -3,6 +3,8 @@ import argparse
 parser=argparse.ArgumentParser()
 parser.add_argument("-sM","--showMon",help="Arata ce site-uri sunt tinute sub monitorizare",action="store_true")
 parser.add_argument("-a","--addSite",help="Adauga site-ul")
+parser.add_argument("-sV","--showVis",help="Arata ce a fost analizat",action="store_true")
+
 
 parser.add_argument("-d","--deleteSite",help="Sterge din lista de urmariri")
 
