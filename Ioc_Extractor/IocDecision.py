@@ -2,12 +2,19 @@ from Ioc_Extractor.IocFilter import *
 from Ioc_Extractor.NLP_Process import *
 from Ioc_Extractor.IocWriter import *
 from nltk import sent_tokenize
+from datetime import datetime
+
 
 
 def makeDecision(text):
 
     if not hasIoc(text):#daca nu exista IOC-uri de extras sub formatul respectiv, nu are rost sa cautam
         return False
+
+
+
+
+
     validIocList=[]
     props=sentencesplit(text)#daca exista, vom testa fiecare propozitie
     for prop in props:
@@ -35,7 +42,11 @@ def create_ioc(lista:list):
     for item in lista:
         iocs.append(construct_ioc(item))
 
-    a=create_ioc_object("aaa",iocs,False)
+    now=datetime.now()
+    currenttime=now.strftime("%D %H:%M:%S")
+    str="Automatic IOC generated at "+currenttime
+
+    a=create_ioc_object(str,iocs,False)
     return a
 
 
@@ -46,8 +57,8 @@ def create_ioc(lista:list):
 
 
 
-a=makeDecision("29[.]68[.]1[.]2 is malicious. Ip 10.10.1.1 is not.")
-print(create_ioc(a))
+#a=makeDecision("29[.]68[.]1[.]2 is malicious. Ip 10.10.1.1 is not.")
+#print(create_ioc(a))
 
 
 

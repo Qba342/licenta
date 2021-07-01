@@ -12,6 +12,7 @@ def sentencesplit(text:str):
     doc=nlp(text)
     return [sent.string.strip() for sent in doc.sents]
 
+
 def removeStopwords(text:str):
     text_tokens = word_tokenize(text)
     tokens_without_sw = [word for word in text_tokens if not word in all_stopwords]
@@ -29,7 +30,7 @@ def NLPisValidIOC(sentence:str,ioc:str):
          #       [child for child in token.children])
 
         for child in token.children:#parcurgem toti copii (vrem sa ajungem la toate radacinile)
-            if str(child)==ioc:
+            if str(child)==ioc:     #daca un element este candidat la ioc, il vom pune sub urmarire
                 triggered=1
         if triggered==1:
             for child in token.children:

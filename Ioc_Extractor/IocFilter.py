@@ -15,7 +15,7 @@ def getRefanged(sentence:str):#aici sunt IOC 100%
         if type=="url":
             ref=iocextract.refang_url(ioc)
             if ref!=ioc:
-                a=a.replace(ioc)
+                a=a.replace(a,ioc)
                 lista.append(iocextract.refang_url(ioc))
 
     lista=list(set(lista))
@@ -74,12 +74,18 @@ def getIocType(text:str):
 
 
 def hasIoc(text):
+    res1=[]
+    res2=[]
+    res3=[]
+    res4=[]
+    try:
         res1 =list(iocextract.extract_iocs(text))
         res2 = list(iocextract.extract_custom_iocs(text, [r"\b((HKLM|HKCU)\\[\\A-Za-z0-9-_]+)\b"]))
         res3 = list(iocextract.extract_custom_iocs(text, [r"\b([A-Za-z0-9-_\.]+\.(exe|dll|bat|sys|htm|html|js|jar|vb|scr|pif|chm|zip|rar|cab|pdf|doc|docx|ppt|pptx|xls|xlsx|swf|gif))\b"]))
         res4 = list(iocextract.extract_custom_iocs(text, [r"\b[A-Z]:\\[A-Za-z0-9-_\.\\]+\b"]))
-
-        return res1+res2+res3+res4
+    except:
+        pass
+    return res1+res2+res3+res4
 
 
 

@@ -13,6 +13,7 @@ class IOXApi():
         self.monitor="monitor.txt"
         self.visited="visited.txt"
         self.mispApi="mispApi.txt"
+        self.processed="processed.txt"
 
         if confpath=="":
             self.confpath="conf/"
@@ -31,6 +32,19 @@ class IOXApi():
         lista=list(f.read().split("\n"))
         f.close()
         return lista
+
+    def getProcessed(self):
+        f = open(self.confpath + self.processed, "rt")
+        lista = list(f.read().split("\n"))
+        f.close()
+        return lista
+
+    def addProcessed(self, site):
+         f = open(self.confpath + self.processed, "a")
+         f.write(site + "\n")
+         f.close()
+         print("Site updatat in procesare")
+
 
     def addSite(self, baseLink):
         listaSiteuri=self.getMonitoredSites()

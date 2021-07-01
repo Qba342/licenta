@@ -19,16 +19,18 @@ class Usual_blog_scrapper(IBlog_Scrapper):
         self.listaBloguri=[]
 
     def __GetBlogsFromPage(self):
-
-        html_content = requests.get(self.base_url).text
-        soup = BeautifulSoup(html_content, "html.parser")
-        for link in soup.find_all("a"):
-            redirect = utils.xstr(link.get("href"))
-            if (utils.is_in_same_domain(utils.get_domain(self.base_url), redirect)):  # verificam daca este in acelasi domeniu
-                self.listaBloguri.append(utils.RemoveComFromString(redirect))
-        for blog in self.listaBloguri:
-            if (blog.find("?") != -1):
-                self.listaBloguri.remove(blog)
+        try:
+            html_content = requests.get(self.base_url).text
+            soup = BeautifulSoup(html_content, "html.parser")
+            for link in soup.find_all("a"):
+                redirect = utils.xstr(link.get("href"))
+                if (utils.is_in_same_domain(utils.get_domain(self.base_url), redirect)):  # verificam daca este in acelasi domeniu
+                    self.listaBloguri.append(utils.RemoveComFromString(redirect))
+            for blog in self.listaBloguri:
+                if (blog.find("?") != -1):
+                    self.listaBloguri.remove(blog)
+        except:
+            pass
 
 
 
@@ -58,7 +60,7 @@ class Usual_blog_scrapper(IBlog_Scrapper):
                 utils.download(pagina, DownloadAdress2)
         else:
             self.__GetBlogsFromPage()
-            api=IOXApi("../conf")
+            api=IOXApi("conf")
             visited=api.getVisited()
 
             for blog in self.listaBloguri:
@@ -72,5 +74,5 @@ class Usual_blog_scrapper(IBlog_Scrapper):
 
 
 
-scrap=Usual_blog_scrapper("https://thehackernews.com/", False)
-scrap.DownloadResources()
+#scrap=Usual_blog_scrapper("https://thehackernews.com/", False)
+#scrap.DownloadResources()

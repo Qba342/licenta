@@ -26,10 +26,13 @@ class pdfExtractor:
 
 
     def get_pdf(self):
-        req=requests.get(self.link_to_pdf,stream=True)
-        f=open(self.path,"wb")
-        f.write(req.content)
-        f.close()
+        try:
+            req=requests.get(self.link_to_pdf,stream=True)
+            f=open(self.path,"wb")
+            f.write(req.content)
+            f.close()
+        except:
+            pass
 
 
     def get_pdf_writing(self):

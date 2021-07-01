@@ -58,5 +58,5 @@ def construct_ioc(ioc:str):
 
 
 
-a=create_ioc_object("ccc",{construct_ioc("19.2.43.144")},False)
-write_to_file(a)
+#a=create_ioc_object("ccc",{construct_ioc("19.2.43.144")},False)
+#write_to_file(a)
