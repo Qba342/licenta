@@ -26,21 +26,15 @@ class FilterHtml:
         for div in divs:
             self.listaClase.append(listToString(div['class']))
 
-    def setBestDiv(self):
-
+    def setBestDiv(self):#cel
         tupleList = []
-
-
         for div in self.listaClase:
             res = self.soup.find("div", {"class": div})
             children = res.findChildren("p", recursive=False)
-            tupleList.append((len(children), div))  # creeam o lista cu copii care contin cele mai multe paragrafe
+            tupleList.append((len(children), div))  # cream o lista cu copii care contin cele mai multe paragrafe
         tupleList.sort(key=lambda tup: tup[0], reverse=True)  # sortam lista descrescator
         bestDiv = tupleList[0][1]
-        # res = soup.find("div", {"class": tupleList[1][1]})
-        # print(res.text)
         longFinal = 0
-
         if tupleList[0][0] == tupleList[1][0]:
             n = 0
             while tupleList[n][0] == tupleList[n + 1][0]:
@@ -50,7 +44,6 @@ class FilterHtml:
                     longFinal = long
                     bestDiv = tupleList[n][1]
                 n = n + 1
-
         self.div = bestDiv
 
     def extractImages(self):
@@ -81,5 +74,5 @@ class FilterHtml:
 
 # extractor("C:/Users/Iulian/Desktop/Proiect
 # Licenta/Blog_Scrapper/downloads/krebsonsecurity/7a3c42a708726ac7534008355eae270f")
-a=FilterHtml("C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/thehackernews/abf9bc598b143e7226083fe7d2952cae")
-a.extract()
+#a=FilterHtml("C:/Users/Iulian/Desktop/Proiect Licenta/Blog_Scrapper/downloads/thehackernews/abf9bc598b143e7226083fe7d2952cae")
+#a.extract()

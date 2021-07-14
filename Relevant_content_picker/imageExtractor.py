@@ -19,7 +19,8 @@ class ImageExtractor:
             img = Image.open(io.BytesIO(resp.content))
             self.text = utils.get_rid_of_spaces(pytesseract.image_to_string(img))
         except:
-            print(f'Invalid URL: "{self.link_to_image}"')
+            pass
+            #print(f'Invalid URL: "{self.link_to_image}"')
 
 
 

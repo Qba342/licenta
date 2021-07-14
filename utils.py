@@ -8,7 +8,7 @@ def getpath():
 class Statics:
     idProc=1
 
-def replace(substrToBeRepalced,substrToReplace,string :str):
+def replace(substrToBeRepalced,substrToReplace,string):
     return re.sub(substrToBeRepalced,substrToReplace,string)
 
 

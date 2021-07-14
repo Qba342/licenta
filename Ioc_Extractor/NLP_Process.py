@@ -5,7 +5,7 @@ import en_core_web_sm
 
 nlp = en_core_web_sm.load()
 all_stopwords = nlp.Defaults.stop_words
-malWords = ['malicious', 'malware', 'ddos', 'phishing', 'threat', 'ransomware', 'ransom', 'ransoms']#TODO:de completat
+malWords = ['malicious', 'malware', 'ddos', 'phishing', 'threat', 'ransomware', 'ransom', 'ransoms','compromised','ioc']#TODO:de completat
 
 
 def sentencesplit(text:str):
@@ -20,15 +20,9 @@ def removeStopwords(text:str):
     return (str1.join(tokens_without_sw))
 
 def NLPisValidIOC(sentence:str,ioc:str):
-
-
     triggered=0
-
     doc=nlp(removeStopwords(sentence))
     for token in doc:
-        #print(token.text, token.dep_, token.head.text, token.head.pos_,
-         #       [child for child in token.children])
-
         for child in token.children:#parcurgem toti copii (vrem sa ajungem la toate radacinile)
             if str(child)==ioc:     #daca un element este candidat la ioc, il vom pune sub urmarire
                 triggered=1

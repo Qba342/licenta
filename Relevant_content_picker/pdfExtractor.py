@@ -67,7 +67,10 @@ class pdfExtractor:
 
     def extract(self):
         self.get_pdf()
-        #self.get_pdf_writing()
+        try:
+         self.get_pdf_writing()
+        except:
+            print("Pdf corupt")
         #self.get_tables()
 
 
@@ -76,6 +79,13 @@ class pdfExtractor:
 
 
 
-p=pdfExtractor('https://sedl.org/afterschool/toolkits/science/pdf/ast_sci_data_tables_sample.pdf')
+#p=pdfExtractor('https://sedl.org/afterschool/toolkits/science/pdf/ast_sci_data_tables_sample.pdf')
 
-p.extract()
+#p.extract()
+
+# path="../processed/"
+#
+# for i in range(200):
+#     f=open(path+str(i+1)+"/pdf","rt",encoding="utf8")
+#     print(f.read())
+#     f.close()

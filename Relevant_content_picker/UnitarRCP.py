@@ -30,22 +30,14 @@ class UnitarRCP:
             imgHandler.set_link(img)
             imgHandler.extract()
             imgtext = imgtext + imgHandler.text + "\n"
-
         for pdf in filter.listaPDF:
             pdfHandler=pdfExtractor(pdf)
             pdfHandler.extract()
             pdftext=pdftext+pdfHandler.text+"\n"
-
-
-
         filteredText=filter.content.replace("&nbsp", " ")
         utils.writetofile(filteredText, self.path+"/html", 'w')
-
         utils.writetofile(imgtext, self.path+"/img", 'w')
         utils.writetofile(pdftext, self.path+"/pdf", 'w')
-
-
-
         utils.Statics.idProc = utils.Statics.idProc + 1
     # print(imgHandler.text)
 

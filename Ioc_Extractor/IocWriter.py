@@ -11,7 +11,6 @@ def create_ioc_object(ioc_name, items, and_or=True):
         top_level_or_node.append(second_level_and_node)
     for item in items:
         condition, document, search, content_type, content = tuple(item)
-        # print condition, document, search, content_type, content
         ii_node = ioc_api.make_indicatoritem_node(condition, document, search, content_type, content)
         if and_or:
             second_level_and_node.append(ii_node)

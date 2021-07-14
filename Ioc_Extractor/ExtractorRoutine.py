@@ -11,6 +11,7 @@ class IoC_Rout():
     def do(self):
         toScan=utils.list_filenames(self.path)
         ioclist=[]
+        print(toScan)
         for dir in toScan:
             path2=self.path+"/"+dir
             for tosc in self.toScanList:
@@ -21,11 +22,10 @@ class IoC_Rout():
                     utils.remove_file(path2+tosc)
                 a=makeDecision(text)
                 if a!=False:
-                    print(path2+tosc)
-                    print(a)
                     ioclist=ioclist+a
             if self.remove==True:
              utils.remove_empty_dir(path2)
+            print("Am incercat sa extrag din ",dir)
         return ioclist
 
 
